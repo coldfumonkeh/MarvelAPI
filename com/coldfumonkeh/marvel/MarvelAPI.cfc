@@ -146,6 +146,54 @@
 	
 	<!--- UTILS --->
 		
+	<cffunction name="generateImage" access="public" output="false" returnType="string" hint="I generate a URL for an image.">
+		<cfargument name="imageData" 		required="true" type="struct" hint="A struct containing both path and extension values." />
+		<cfargument name="image_variant" 	required="true" type="string" hint="The image variant to obtain." />
+			<cfset var strFullImagepath = '' />
+				<cfif structKeyExists(arguments.imageData, 'path') AND structKeyExists(arguments.imageData, 'extension')>
+					<cfset strFullImagepath = arguments.imageData['path'] />
+					<cfif len(arguments.image_variant)>
+						<cfset strFullImagepath = strFullImagepath & '/' & arguments.image_variant />
+					</cfif>
+					<cfset strFullImagepath = strFullImagepath & '.' & arguments.imageData['extension'] />
+				</cfif>
+		<cfreturn strFullImagepath />
+	</cffunction>
+	
+	<!---
+	Portrait aspect ratio:
+	
+	portrait_small 	50x75px
+	portrait_medium 	100x150px
+	portrait_xlarge 	150x225px
+	portrait_fantastic 	168x252px
+	portrait_uncanny 	300x450px
+	portrait_incredible 	216x324px
+	
+	Standard aspect ratio:
+	
+	standard_small 	65x45px
+	standard_medium 	100x100px
+	standard_large 	140x140px
+	standard_xlarge 	200x200px
+	standard_fantastic 	250x250px
+	standard_amazing 	180x180px
+	
+	Landscape aspect ratio:
+	
+	landscape_small 	120x90px
+	landscape_medium 	175x30px
+	landscape_large 	190x140px
+	landscape_xlarge 	270x200px
+	landscape_amazing 	250x156px
+	landscape_incredible 	464x261px
+	
+	Full size images:
+	
+	detail 	full image, constrained to 500px wide
+	full-size image 	no variant descriptor
+	--->
+		
 	<cffunction name="manageURLParams" access="private" output="false" hint="I am used to manage the query params and append provided parameters if necessary.">
 		<cfargument name="request_url" required="true" type="string" hint="The URL to request." />
 		<cfargument name="parameters"  required="true" type="struct" hint="The arguments sent to each request." />
