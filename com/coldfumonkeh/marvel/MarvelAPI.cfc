@@ -90,11 +90,11 @@
 	<!--- /v1/public/characters/{characterid}/comics --->
 	<cffunction name="getCharacterComics" output="false" access="public" hint="Fetches a list of comics filtered by a character id.">
 		<cfargument name="characterId" 			required="true" 	type="number" 	hint="A single character id." />
-		<cfargument name="format" 				required="true" 	type="string" 	hint="Filter by the issue format (e.g. comic, digital comic, hardcover)." />
-		<cfargument name="formatType" 			required="true" 	type="string" 	hint="Filter by the issue format type (comic or collection)." />
-		<cfargument name="noVariants" 			required="true" 	type="boolean" 	hint="Exclude variant comics from the result set." />
-		<cfargument name="dateDescriptor" 		required="true" 	type="string" 	hint="Return comics within a predefined date range." />
-		<cfargument name="dateRange" 			required="true" 	type="number" 	hint="Return comics within a predefined date range. Dates must be specified as date1,date2 (e.g. 2013-01-01,2013-01-02). Dates are preferably formatted as YYYY-MM-DD but may be sent as any common date format." />
+		<cfargument name="format" 				required="false" 	type="string" 	hint="Filter by the issue format (e.g. comic, digital comic, hardcover)." />
+		<cfargument name="formatType" 			required="false" 	type="string" 	hint="Filter by the issue format type (comic or collection)." />
+		<cfargument name="noVariants" 			required="false" 	type="boolean" 	hint="Exclude variant comics from the result set." />
+		<cfargument name="dateDescriptor" 		required="false" 	type="string" 	hint="Return comics within a predefined date range." />
+		<cfargument name="dateRange" 			required="false" 	type="number" 	hint="Return comics within a predefined date range. Dates must be specified as date1,date2 (e.g. 2013-01-01,2013-01-02). Dates are preferably formatted as YYYY-MM-DD but may be sent as any common date format." />
 		<cfargument name="modifiedSince" 		required="false" 	type="date" 	hint="Return only comics which have been modified since the specified date." />
 		<cfargument name="creators" 			required="false" 	type="numeric" hint="Return only comics which feature work by the specified creators (accepts comma-separated list of ids)." />
 		<cfargument name="series" 				required="false" 	type="numeric" hint="Return only comics which are part of the specified series (accepts comma-separated list of ids)." />
@@ -106,6 +106,39 @@
 		<cfargument name="limit" 				required="false" 	type="numeric" hint="Limit the result set to the specified number of resources." />
 		<cfargument name="offset" 				required="false" 	type="numeric" hint="Skip the specified number of resources in the result set.." />
 			<cfset var strAPIRequestURL = getAPIEndpoint() & 'v1/public/characters/' & arguments.characterId & '/comics' &  generateRequestURL() />		
+			<cfset var strReturn = makeAPIRequest(manageURLParams(strAPIRequestURL, arguments)) />
+		<cfreturn handleReturnFormat(strReturn) />
+	</cffunction>
+	
+	<!--- /v1/public/characters/{characterid}/events --->
+	<cffunction name="getCharacterEvents" output="false" access="public" hint="Fetches a list of events filtered by a character id.">
+		<cfargument name="characterId" 			required="true" 	type="number" 	hint="A single character id." />
+		<cfargument name="name" 				required="false" 	type="string" 	hint="Filter the event list by name." />
+		<cfargument name="modifiedSince" 		required="false" 	type="date" 	hint="Return only events which have been modified since the specified date." />
+		<cfargument name="creators" 			required="false" 	type="numeric" 	hint="Return only events which feature work by the specified creators (accepts comma-separated list of ids)." />
+		<cfargument name="series" 				required="false" 	type="numeric" 	hint="Return only events which are part of the specified series (accepts comma-separated list of ids)." />
+		<cfargument name="comics" 				required="false" 	type="numeric" 	hint="Return only events which take place in the specified comics (accepts comma-separated list of ids)." />
+		<cfargument name="stories" 				required="false" 	type="numeric" 	hint="Return only events which contain the specified stories (accepts comma-separated list of ids)." />
+		<cfargument name="orderBy" 				required="false" 	type="string" 	hint="Order the result set by a field or fields. Add a '-' to the value to sort in descending order. Multiple values are given priority in the order in which they are passed." />
+		<cfargument name="limit" 				required="false" 	type="numeric" 	hint="Limit the result set to the specified number of resources." />
+		<cfargument name="offset" 				required="false" 	type="numeric" 	hint="Skip the specified number of resources in the result set.." />
+			<cfset var strAPIRequestURL = getAPIEndpoint() & 'v1/public/characters/' & arguments.characterId & '/events' &  generateRequestURL() />		
+			<cfset var strReturn = makeAPIRequest(manageURLParams(strAPIRequestURL, arguments)) />
+		<cfreturn handleReturnFormat(strReturn) />
+	</cffunction>
+	
+	<!--- /v1/public/characters/{characterid}/stories --->
+	<cffunction name="getCharacterStories" output="false" access="public" hint="Fetches a list of stories filtered by a character id.">
+		<cfargument name="characterId" 			required="true" 	type="number" 	hint="A single character id." />
+		<cfargument name="modifiedSince" 		required="false" 	type="date" 	hint="Return only stories which have been modified since the specified date." />
+		<cfargument name="comics" 				required="false" 	type="numeric" 	hint="Return only stories which take place in the specified comics (accepts comma-separated list of ids)." />
+		<cfargument name="series" 				required="false" 	type="numeric" 	hint="Return only stories which are part of the specified series (accepts comma-separated list of ids)." />
+		<cfargument name="events" 				required="false" 	type="numeric" 	hint="Return only stories which take place during the specified events (accepts comma-separated list of ids)." />
+		<cfargument name="creators" 			required="false" 	type="numeric" 	hint="Return only stories which feature work by the specified creators (accepts comma-separated list of ids)." />
+		<cfargument name="orderBy" 				required="false" 	type="string" 	hint="Order the result set by a field or fields. Add a '-' to the value to sort in descending order. Multiple values are given priority in the order in which they are passed." />
+		<cfargument name="limit" 				required="false" 	type="numeric" 	hint="Limit the result set to the specified number of resources." />
+		<cfargument name="offset" 				required="false" 	type="numeric" 	hint="Skip the specified number of resources in the result set.." />
+			<cfset var strAPIRequestURL = getAPIEndpoint() & 'v1/public/characters/' & arguments.characterId & '/events' &  generateRequestURL() />		
 			<cfset var strReturn = makeAPIRequest(manageURLParams(strAPIRequestURL, arguments)) />
 		<cfreturn handleReturnFormat(strReturn) />
 	</cffunction>
