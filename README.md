@@ -40,8 +40,9 @@ Once you have your public and private keys you simply need to pass them in to th
         parseResults = true
     ) />
 
-The parseResults parameter is an optional boolean value. When set to true all responses from the API are returned as a ColdFusion struct (converted from the JSON response).
-When false, the response will be returned as the literal JSON string intended by the Marvel API Gods.
+The **parseResults** parameter is an optional boolean value. 
+When set to **true** all responses from the API are returned as a ColdFusion struct (converted from the JSON response).
+When **false**, the response will be returned as the literal JSON string intended by the Marvel API Gods.
 
 The following is an example to get all available characters:
 
@@ -56,7 +57,7 @@ Let's filter this by character name:
     
 #### Dealing with covers and images
 
-The API gives you the ability to obtain and outut images (covers, character profiles) in various sizes.
+The API gives you the ability to obtain and output images such as cover artwork in various sizes.
 
 An example response from the API will include a struct or JSON child object that contains the image path and extension like so:
 
@@ -67,13 +68,15 @@ An example response from the API will include a struct or JSON child object that
 
 The CFC has a public method called **generateImage()** which accepts the image data structure / object (containing the path and extension) as a required parameter.
 The second paremeter is the size of the image to return in the form of a URL friendly descriptor.
-For example, a standard aspect ratio medium image (100x100) is 'standard_medium'.
+For example, a standard aspect ratio medium image (100x100) is **'standard_medium'**.
 
 Make the call like so:
 
     <cfset strImageSource = objMarvel.generateImage(stuImageData, 'standard_medium') />
     
-The response from this will be a formatted URL string to the image of the desired / selected size.
+The response from this will be a formatted URL string to the image of the desired / selected size:
+
+    http://i.annihil.us/u/prod/marvel/i/mg/3/40/4bb4680432f73/standard_medium.jpg
     
 
 ### Hinted beyond belief
