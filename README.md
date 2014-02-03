@@ -78,12 +78,11 @@ The response from this will be a formatted URL string for the image of the desir
 
     http://i.annihil.us/u/prod/marvel/i/mg/3/40/4bb4680432f73/standard_medium.jpg
     
-Why is there a method to handle this? It seems pointless.
+"Why is there a method to handle this? It seems pointless."
 
----
+The **generateImage()** method exists because the image size is an optional parameter. It will check it's existence for you before generating the correct URL string ready for you to insert into your awesome app.
+Using this function means that you don't have to build the string yourself as the process to do so has been included for you.
 
-The method exists because the image size is an optional parameter. The method will check it's existence for you before generating the correct URL string.
-Using this method you don't have to build the string yourself. The process to do so has been included for you.
 I'm nice like that.
     
 
