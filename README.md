@@ -30,3 +30,7 @@ monkehTweets requires ColdFusion 8+
 To get started with the API you will need to sign up for a [free account at developer.marvel.com](http://developer.marvel.com) and receive your public and private key values which are required for API authentication.
 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/coldfumonkeh/marvelapi/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
