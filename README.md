@@ -67,7 +67,7 @@ An example response from the API will include a struct or JSON child object that
     }
 
 The CFC has a public method called **generateImage()** which accepts the image data structure / object (containing the path and extension) as a required parameter.
-The second paremeter is the size of the image to return in the form of a URL friendly descriptor.
+The second parameter is the size of the image to return in the form of a URL friendly descriptor.
 For example, a standard aspect ratio medium image (100x100) is **'standard_medium'**.
 
 Make the call like so:
@@ -77,6 +77,14 @@ Make the call like so:
 The response from this will be a formatted URL string to the image of the desired / selected size:
 
     http://i.annihil.us/u/prod/marvel/i/mg/3/40/4bb4680432f73/standard_medium.jpg
+    
+Why is there a method to handle this? It seems pointless.
+
+---
+
+The method exists because the image size is an optional parameter. The method will check it's existence for you before generating the correct URL string.
+Using this method you don't have to build the string yourself. The process to do so has been included for you.
+I'm nice like that.
     
 
 ### Hinted beyond belief
