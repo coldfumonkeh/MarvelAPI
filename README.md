@@ -74,7 +74,7 @@ Make the call like so:
 
     <cfset strImageSource = objMarvel.generateImage(stuImageData, 'standard_medium') />
     
-The response from this will be a formatted URL string to the image of the desired / selected size:
+The response from this will be a formatted URL string for the image of the desired / selected size:
 
     http://i.annihil.us/u/prod/marvel/i/mg/3/40/4bb4680432f73/standard_medium.jpg
     
